@@ -9,7 +9,7 @@ maven build:
   image: maven:3.6.3-jdk-11-slim
   stage: build
   script:
-    - mvn clean install && mvn package -B
+    - mvn clean install && mvn spring-boot:build-image
   artifacts:
     paths:
       - target/*.jar
