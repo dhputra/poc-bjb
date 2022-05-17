@@ -5,11 +5,13 @@ stages:
   - build
   - docker
 
-maven build:
-  image: maven:3.6.3-jdk-11-slim
+maven-build:
+  image: maven:3-jdk-11
   stage: build
+  services:
+    - docker:dind
   script:
-    - mvn clean install && mvn spring-boot:build-image
+    - "mvn spring-boot:build-image"
   artifacts:
     paths:
       - target/*.jar
