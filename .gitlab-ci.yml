@@ -12,7 +12,7 @@ maven-build:
   image: docker:20.10.8-dind-alpine3.13
   services:
     - docker:20.10.8-dind
-  stage: build_push
+  stage: build
   before_script:
     - apk add --update openjdk11
   script:
