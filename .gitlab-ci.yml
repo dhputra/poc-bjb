@@ -16,7 +16,7 @@ maven build:
 
 docker build:
   image: docker:stable
-  stage: build
+  stage: docker
   script:
     - docker build -t $DOCKER_REPO .
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
