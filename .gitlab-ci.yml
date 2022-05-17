@@ -3,6 +3,7 @@ services:
 
 stages:
   - build
+  - docker
 
 maven build:
   image: maven:3.6.3-jdk-11-slim
@@ -12,3 +13,11 @@ maven build:
   artifacts:
     paths:
       - target/*.jar
+
+docker build:
+  image: docker:stable
+  stage: build
+  script:
+    - docker build -t $DOCKER_REPO .
+    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
+    - docker push $DOCKER_REPO
