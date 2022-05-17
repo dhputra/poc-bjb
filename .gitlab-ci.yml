@@ -7,10 +7,8 @@ stages:
 maven build:
   image: maven:3.6.3-jdk-11-slim
   stage: build
-  before_script:
-    - source .${CI_COMMIT_REF_NAME}.env
   script:
-    - mvn clean install -Dspring.profiles.active=$SPRING_ACTIVE_PROFILE && mvn package -B -e -Dspring.profiles.active=$SPRING_ACTIVE_PROFILE
+    - mvn clean install && mvn package -B
   artifacts:
     paths:
       - target/*.jar
