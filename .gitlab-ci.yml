@@ -18,6 +18,7 @@ maven-build:
   script:
     - chmod 755 ./mvnw
     - ./mvnw spring-boot:build-image
+    - ls target
 
 docker build:
   image: docker:stable
