@@ -6,15 +6,18 @@ stages:
   - docker
 
 maven-build:
-  image: maven:3-jdk-11
-  stage: build
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+  image: docker:20.10.8-dind-alpine3.13
   services:
-    - docker:dind
+    - docker:20.10.8-dind
+  stage: build_push
+  before_script:
+    - apk add --update openjdk11
   script:
-    - "mvn spring-boot:build-image"
-  artifacts:
-    paths:
-      - target/*.jar
+    - chmod 755 ./mvnw
+    - ./mvnw spring-boot:build-image
 
 docker build:
   image: docker:stable
